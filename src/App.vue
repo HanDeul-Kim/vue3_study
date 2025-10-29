@@ -13,7 +13,7 @@
                         <div class="product-img">
                             <img :src="e.imgSrc" alt="원룸 이미지"></img>
                         </div>
-                        <a href="javascript:void(0);">{{e.name}}</a>
+                        <a href="javascript:void(0);" @click="openModal(idx)">{{e.name}}</a>
                         <p>{{e.price}}</p>
                         <div class="btn-wrap report">
                             <button @click="e.reportNum++">허위매물신고</button>
@@ -21,7 +21,6 @@
                         </div>
                     </li>
                 </ul>
-
 
                 <!-- 이벤트 핸들러 -->
                 <!-- <ul>
@@ -55,6 +54,20 @@
 
         </section>
     </div>
+
+
+    
+    <!-- vue도 props같은게 있는지 보고 재사용성 고려해보자 -->
+    <div class="modal-wrap" v-if="visibleModal !== null">
+        <div class="modal">
+            <button @click="closeModal" class="modal-close">닫기</button>
+            <h2>상세 페이지({{products[visibleModal].modalCont}})</h2>
+            <p>상세 페이지 내용 상세 페이지 내용상세 페이지 내용상세 페이지 내용 상세 페이지 내용 상세 페이지 내용 상세 페이지 내용 상세 페이지 내용 상세 페이지 내용 상세 페이지 내용 상세 페이지 내용</p>
+        </div>
+    </div>
+   
+
+
 </template>
 
 <script>
@@ -70,20 +83,22 @@ export default {
                 { name: 'About', link: 'javascript:void(0);' }
             ],
             products: [
-                {name:'역삼동 원룸', price:'80만원', reportNum: 0, imgSrc: '/img/room0.jpg'},
-                {name:'대방동 원룸', price:'60만원', reportNum: 0, imgSrc: '/img/room1.jpg'},
-                {name:'자양동 원룸', price:'70만원', reportNum: 0, imgSrc: '/img/room2.jpg'}
+                {name:'역삼동 원룸', price:'80만원', reportNum: 0, imgSrc: '/img/room0.jpg', modalCont:'feat.역삼동'},
+                {name:'대방동 원룸', price:'60만원', reportNum: 0, imgSrc: '/img/room1.jpg', modalCont:'feat.대방동'},
+                {name:'자양동 원룸', price:'70만원', reportNum: 0, imgSrc: '/img/room2.jpg', modalCont:'feat.자양동'}
             ],
-            // currentNum1: 0,
-            // currentNum2: 0,
-            // currentNum3: 0,
+            // 모달 상태
+            visibleModal: null
         }
     },
     // vue에서 함수 만들 때
     methods : {
-        // plus() {
-        //     this.products.reportNum++;
-        // }
+        openModal(idx) {
+            this.visibleModal = idx;
+        },
+        closeModal() {
+            this.visibleModal = null;
+        }
     },
     components: {
 
@@ -119,7 +134,8 @@ section {
     border-radius: 12px;
 }
 .product-img img{
-    width: 500px;
+    width: 100%;
+    max-width:500px;
 }
 .btn-wrap.report {}
 .btn-wrap.report button {
@@ -134,5 +150,43 @@ section {
 .btn-wrap.report span {
     font-size: 14px;
     color:#111;
+}
+/********************** 모달 **********************/
+.modal-wrap {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.7);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.modal {
+    position: relative;
+    width: 100%;
+    max-width:700px;
+    background-color: #fff;
+    padding: 20px 40px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap:12px;
+}
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-weight: 500;
+    font-size: 14px;
+}
+.modal > h2 {
+    font-size: 28px;
+    color:#000;
+}
+.modal > p {
+    color: #333;
 }
 </style>
