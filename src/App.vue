@@ -2,7 +2,7 @@
     <div class="container">
         <header>
             <div class="menu">
-                <a :href="e.link" v-for="(e, idx) in menus" :key="idx">{{ e.name }}</a>
+                <a :href="e.link" v-for="(e, idx) in menus" :key="idx">{{ e.title }}</a>
             </div>
         </header>
         <section>
@@ -13,42 +13,15 @@
                         <div class="product-img">
                             <img :src="e.imgSrc" alt="원룸 이미지"></img>
                         </div>
-                        <a href="javascript:void(0);" @click="openModal(idx)">{{e.name}}</a>
-                        <p>{{e.price}}</p>
+                        <a href="javascript:void(0);" @click="openModal(idx)">{{e.title}}</a>
+                        <p>{{e.price}}원</p>
                         <div class="btn-wrap report">
-                            <button @click="e.reportNum++">허위매물신고</button>
-                            <span>누적 신고 : {{e.reportNum}}</span>
+                            <button @click="e.currentNum++">좋아요</button>
+                            <span>누적 수 : {{e.currentNum}}</span>
                         </div>
                     </li>
                 </ul>
 
-                <!-- 이벤트 핸들러 -->
-                <!-- <ul>
-                    <li>
-                        <a href="javascript:void(0);">{{products[0].name}}</a>
-                        <p>80만원</p>
-                        <div class="btn-wrap report">
-                            <button @click="plus">허위매물신고</button>
-                            <span>누적 신고 : {{products[0].reportNum}}</span>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);">{{products[1].name}}</a>
-                        <p>60만원</p>
-                        <div class="btn-wrap report">
-                            <button @click="plus">허위매물신고</button>
-                            <span>누적 신고 : {{products[1].reportNum}}</span>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);">{{products[2].name}}</a>
-                        <p>70만원</p>
-                        <div class="btn-wrap report">
-                            <button @click="plus">허위매물신고</button>
-                            <span>누적 신고 : {{products[2].reportNum}}</span>
-                        </div>
-                    </li>
-                </ul> -->
             </div>
 
 
@@ -71,6 +44,9 @@
 </template>
 
 <script>
+// 상품 데이터 import
+import productData from './assets/data'
+
 export default {
     name: 'App',
 
@@ -82,11 +58,8 @@ export default {
                 { name: 'Products', link: 'javascript:void(0);' },
                 { name: 'About', link: 'javascript:void(0);' }
             ],
-            products: [
-                {name:'역삼동 원룸', price:'80만원', reportNum: 0, imgSrc: '/img/room0.jpg', modalCont:'feat.역삼동'},
-                {name:'대방동 원룸', price:'60만원', reportNum: 0, imgSrc: '/img/room1.jpg', modalCont:'feat.대방동'},
-                {name:'자양동 원룸', price:'70만원', reportNum: 0, imgSrc: '/img/room2.jpg', modalCont:'feat.자양동'}
-            ],
+            // 상품 데이터
+            products: productData,
             // 모달 상태
             visibleModal: null
         }
@@ -135,7 +108,7 @@ section {
 }
 .product-img img{
     width: 100%;
-    max-width:500px;
+    max-width:200px;
 }
 .btn-wrap.report {}
 .btn-wrap.report button {
