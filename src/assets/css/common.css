@@ -1,7 +1,75 @@
+/* 노토 산스 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
 *{
     padding:0; margin: 0; box-sizing: border-box;
+    font-family: "Noto Sans KR", sans-serif;
 }
 a{text-decoration: none; color:#000;}
 ul,ol,li {list-style: none;}
 button {outline: none; background: none; border:none; cursor: pointer;}
+
+
+/********************** button **********************/
 .btn-24 {height: 24px;}
+
+/********************** 모달 **********************/
+.modal-wrap {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    background-color: #fff;
+    padding: 20px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-weight: 500;
+    font-size: 14px;
+}
+.modal-head {
+    margin-bottom: 40px;
+}
+.modal>h2 {
+    font-size: 28px;
+    color: #000;
+}
+
+.modal>p {
+    color: #333;
+}
+
+.modal-content {
+    display: flex;
+    gap: 20px;
+}
+
+.modal-content-img {}
+.modal-content-img>img {}
+.modal-content-info {}
+.modal-footer {width: 100%;}
+.modal-footer span{
+    display: block;
+    width: 100%;
+    text-align: right;
+    font-weight: 500;
+}

@@ -2,10 +2,19 @@
     <div class="container">
         <header>
             <div class="menu">
-                <a :href="e.link" v-for="(e, idx) in menus" :key="idx">{{ e.title }}</a>
+                <a :href="e.link" v-for="(e, idx) in menus" :key="idx">{{ e.name }}</a>
             </div>
         </header>
+        
         <section>
+            <div class="banner-promotion">
+                <h2>시즌 음료 프로모션</h2>
+                <p>
+                    새롭게 선보이는 디카페인 아메리카노, 에티오피아 시다모 원두를 정성껏 로스팅하여 만들어졌습니다.<br>
+                    풍부한 과일 향과 부드러운 초콜릿 뉘앙스가 조화를 이루며, 카페인 걱정 없이 여유로운 한 모금을 경험해보세요.
+                </p>
+            </div>
+
             <div class="item-info-inner">
                 <!-- 반복문 -->
                 <ul>
@@ -13,32 +22,57 @@
                         <div class="product-img">
                             <img :src="e.imgSrc" alt="원룸 이미지"></img>
                         </div>
-                        <a href="javascript:void(0);" @click="openModal(idx)">{{e.title}}</a>
-                        <p>{{e.price}}원</p>
+                        <a href="javascript:void(0);" @click="openModal(idx)">{{ e.title }}</a>
+                        <p>{{ e.price }}원</p>
                         <div class="btn-wrap report">
                             <button @click="e.currentNum++">좋아요</button>
-                            <span>누적 수 : {{e.currentNum}}</span>
+                            <span>누적 수 : {{ e.currentNum }}</span>
                         </div>
                     </li>
                 </ul>
-
             </div>
-
-
         </section>
+
+        <!-- vue에서의 if문 -->
+        <!-- <div v-if="1 == 2">
+            참일 때 보여줘
+        </div>
+        <div v-else>
+            else문
+        </div>
+        <div v-else-if="1 == 1">
+            else if 문
+        </div> -->
+
+
+        
     </div>
 
 
-    
+
     <!-- vue도 props같은게 있는지 보고 재사용성 고려해보자 -->
     <div class="modal-wrap" v-if="visibleModal !== null">
         <div class="modal">
             <button @click="closeModal" class="modal-close">닫기</button>
-            <h2>상세 페이지({{products[visibleModal].modalCont}})</h2>
-            <p>상세 페이지 내용 상세 페이지 내용상세 페이지 내용상세 페이지 내용 상세 페이지 내용 상세 페이지 내용 상세 페이지 내용 상세 페이지 내용 상세 페이지 내용 상세 페이지 내용 상세 페이지 내용</p>
+            <div class="modal-head">
+                <h2>{{ products[visibleModal].modalHead }}</h2>
+            </div>
+            <div class="modal-content">
+                <div class="modal-content-img">
+                    <img :src="products[visibleModal].imgSrc" alt="음료 이미지">
+                </div>
+                <div class="modal-content-info">
+                    <p v-if="products[visibleModal].modalCont2 !== ''">{{products[visibleModal].modalCont2}}</p>
+                    <p v-else>데이터가 없습니다.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span>{{ products[visibleModal].price }} won</span>
+            </div>
         </div>
     </div>
-   
+
+    
 
 
 </template>
@@ -54,9 +88,9 @@ export default {
     data() {
         return {
             menus: [
-                { name: 'Home', link: 'javascript:void(0);' },
-                { name: 'Products', link: 'javascript:void(0);' },
-                { name: 'About', link: 'javascript:void(0);' }
+                { name: '메뉴', link: 'javascript:void(0);' },
+                { name: '스토어 찾기', link: 'javascript:void(0);' },
+                { name: '오시는길', link: 'javascript:void(0);' }
             ],
             // 상품 데이터
             products: productData,
@@ -65,7 +99,7 @@ export default {
         }
     },
     // vue에서 함수 만들 때
-    methods : {
+    methods: {
         openModal(idx) {
             this.visibleModal = idx;
         },
@@ -80,86 +114,7 @@ export default {
 </script>
 
 <style>
-section {
-    padding: 0 20px;
-}
-.menu {
-    display: flex;
-    gap: 12px;
-    background-color: dodgerblue;
-    padding: 16px;
-    border-radius: 10px;
-}
 
-.menu>a {
-    color: #fff;
-}
 
-.item-info-inner>ul {
-    display: flex;
-    flex-direction: column;
-}
 
-.item-info-inner>ul>li {
-    padding:16px;
-    margin-top: 20px;
-    border: 1px solid #000;
-    border-radius: 12px;
-}
-.product-img img{
-    width: 100%;
-    max-width:200px;
-}
-.btn-wrap.report {}
-.btn-wrap.report button {
-    padding: 0 4px;
-    height: 28px;
-    background-color: #b71919;
-    color:#fff;
-    border-radius: 4px;
-    border: 1px solid #fff;
-    margin-right: 12px;
-}
-.btn-wrap.report span {
-    font-size: 14px;
-    color:#111;
-}
-/********************** 모달 **********************/
-.modal-wrap {
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: rgba(0,0,0,0.7);
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-.modal {
-    position: relative;
-    width: 100%;
-    max-width:700px;
-    background-color: #fff;
-    padding: 20px 40px;
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    gap:12px;
-}
-.modal-close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-weight: 500;
-    font-size: 14px;
-}
-.modal > h2 {
-    font-size: 28px;
-    color:#000;
-}
-.modal > p {
-    color: #333;
-}
 </style>
