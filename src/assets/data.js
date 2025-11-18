@@ -18,7 +18,7 @@ export default [{
 },
 {
     id: 2,
-    price: '500,000',
+    price: '4,000',
     currentNum: 0,
     title: "아몬드라떼",
     imgSrc: "/img/menu03.jpg",
@@ -27,7 +27,7 @@ export default [{
 },
 {
     id: 3,
-    price: '600,000',
+    price: '3,800',
     currentNum: 0,
     title: "카페모카",
     imgSrc: "/img/menu04.jpg",
@@ -36,11 +36,11 @@ export default [{
 },
 {
     id: 4,
-    price: '750,000',
+    price: '3,000',
     currentNum: 0,
     title: "복숭아 아이스티",
     imgSrc: "/img/menu05.jpg",
-    modalHead: "아이스티",
+    modalHead: "복숭아 아이스티",
     modalCont2: "상큼하고 달콤한 복숭아 향이 가득한 아이스티. 시원하게 즐기기 좋은 과일 음료로, 청량감이 일품입니다."
 },
 ];
