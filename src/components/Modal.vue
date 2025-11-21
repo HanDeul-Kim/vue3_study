@@ -25,11 +25,13 @@
 <script>
 export default {
     name: 'Modal',
-
+    props: {
+        products : Array,
+        visibleModal: Boolean,
+        closeModal: Function
+    },
     data() {
-        return {
-
-        }
+        return {}
     },
 }
 </script>

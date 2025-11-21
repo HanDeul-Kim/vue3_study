@@ -10,16 +10,10 @@
 <script>
     export default {
     name: 'Header',
-
-    data() {
-        return {
-            menus: [
-                { name: '메뉴', link: 'javascript:void(0);' },
-                { name: '스토어 찾기', link: 'javascript:void(0);' },
-                { name: '오시는길', link: 'javascript:void(0);' }
-            ],
-        }
+    props: {
+        menus : Array
     },
+    data() {}
 }
 </script>
 
