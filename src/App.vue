@@ -14,7 +14,7 @@
             </div>
         </section>
         <!-- 모달 -->
-        <Modal :products="products" :visibleModal="visibleModal" :closeModal="closeModal" />
+        <Modal @close-modal="visibleModal=null" :products="products" :visibleModal="visibleModal" :closeModal="closeModal" />
     </div>
 </template>
 
@@ -53,6 +53,7 @@ export default {
         closeModal() {
             this.visibleModal = null;
         }
+
     },
     components: {
         Header, Banner, Card, Modal

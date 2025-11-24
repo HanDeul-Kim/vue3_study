@@ -2,7 +2,12 @@
     <div class="modal-wrap" v-if="visibleModal !== null">
         <div class="modal-overlay" @click="closeModal"></div>
         <div class="modal">
-            <button @click="closeModal" class="modal-close">닫기</button>
+            <!-- <button @click="closeModal" class="modal-close">닫기</button> -->
+            
+            <!-- $emit -->
+            <button @click="$emit('close-modal')" class="modal-close">
+                닫기
+            </button>
             <div class="modal-head">
                 <h2>{{ products[visibleModal].modalHead }}</h2>
             </div>
