@@ -12,6 +12,21 @@ button {outline: none; background: none; border:none; cursor: pointer;}
 
 /********************** button **********************/
 .btn-24 {height: 24px;}
+/********************** input **********************/
+input {
+    outline: none;
+    border: 2px solid #ccc;
+    transition: border 0.5s;
+    color:#000;
+}
+input:focus {
+    border: 2px solid dodgerblue;
+}
+.input-32 {
+    height: 32px;
+    padding: 12px 8px;
+}
+
 
 /********************** 모달 **********************/
 .modal-wrap {
@@ -72,10 +87,21 @@ button {outline: none; background: none; border:none; cursor: pointer;}
 .modal-content-img {}
 .modal-content-img>img {}
 .modal-content-info {}
-.modal-footer {width: 100%;}
-.modal-footer span{
-    display: block;
+.modal-footer {
+    display: flex;
     width: 100%;
+    gap:40px;
+}
+.modal-footer span{
+    display:flex;
+    justify-content: center;
+    align-items: center;
     text-align: right;
     font-weight: 500;
+    flex-shrink: 0;
+}
+
+.modal-footer input {
+    flex-grow: 1;
+    width: 100%;
 }
