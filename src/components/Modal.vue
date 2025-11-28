@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <input v-model.number="quantity" type="text" class="input-32" placeholder="수량 input">
+                <input v-model="quantity" type="text" class="input-32" placeholder="수량 input">
                 <!-- <span v-if="quantity == ''">{{products[visibleModal].price}} won</span>
                 <span v-else>{{ Number(products[visibleModal]?.price.replace(/,/g, '')) * quantity }} won</span> -->
                 <span>{{ finalPrice() }} won</span>
@@ -36,6 +36,20 @@ export default {
     data() {
         return {
             quantity: "",
+        }
+    },
+    // input으로 받은 data값 감시하는 함수
+    watch: {
+        // quantity가 변경 될 때마다 아래 함수 실행 됨
+        quantity(a, b) {
+            // a는 지금 변경된 최신 값. 즉, 마지막으로 입력된 quantity값
+            // b는 바뀌기 이전의 값
+            
+
+            if(isNaN(a)) {
+                alert('숫자만 입력 가능합니다.')
+                this.quantity = b;
+            }
         }
     },
     props: {
@@ -54,8 +68,10 @@ export default {
                 const qty = this.quantity === "" ? 1 : Number(this.quantity);
                 return (priceNum * qty).toLocaleString();
             }
+        },
 
-        }
+
+
     },
 }
 </script>
