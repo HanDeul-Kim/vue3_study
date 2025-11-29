@@ -29,6 +29,36 @@ input:focus {
 
 
 /********************** 모달 **********************/
+.modal-anim-start {
+    opacity: 0;
+    transition: 0.5s;
+}
+.modal-anim-end {
+    opacity: 1;
+}
+/* vue 내장 컴포넌트 transtion의 클래스 3개 */
+/* anim 시작시 */
+.fade-enter-from {
+    opacity: 0;
+}
+/* transtion 적으면 됨 */
+.fade-enter-active {
+    transition: 0.5s;
+}
+/* anim 끝날시 */
+.fade-enter-to {
+    opacity: 1;
+}
+.fade-leave-from {
+    opacity: 1;
+}
+.fade-leave-active {
+    transition: 0.5s;
+}
+.fade-leave-to {
+    opacity: 0;
+}
+
 .modal-wrap {
     width: 100%;
     height: 100vh;

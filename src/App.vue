@@ -14,7 +14,21 @@
             </div>
         </section>
         <!-- 모달 -->
-        <Modal @close-modal="visibleModal=null" :products="products" :visibleModal="visibleModal" :closeModal="closeModal" />
+        <!--
+            애니메이션 방법1. 
+            클래스명 : 조건 => 조건이 true일때 class명 적용, false일때 class명 없음
+        -->
+        <!-- <div class="modal-anim-start" :class="{'modal-anim-end' : visibleModal}">
+            <Modal @close-modal="visibleModal=null" :products="products" :visibleModal="visibleModal" :closeModal="closeModal" />
+        </div> -->
+
+         <!--
+            애니메이션 방법2. 
+            vue 내장 컴포넌트 transition 사용하기
+        -->
+        <Transition name="fade">
+            <Modal @close-modal="visibleModal=null" :products="products" :visibleModal="visibleModal" :closeModal="closeModal" />
+        </Transition>
     </div>
 </template>
 
