@@ -88,9 +88,11 @@ export default {
         closeModal() {
             this.visibleModal = null;
         },
+        // 메뉴 토글 
         toggleList() {
             this.visibleSortMenu = !this.visibleSortMenu;
         },
+        // 아이템 정렬
         sortItems(type) {
             this.currentType = type; 
             this.visibleSortMenu = false;
