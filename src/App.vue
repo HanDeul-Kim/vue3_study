@@ -6,6 +6,19 @@
             <!-- 배너 -->
             <Banner />
 
+            <!-- 아이템 sort -->
+            <div class="sort-button-wrap">
+                <button @click="toggleList" class="btn-md btn-32 btn-primary">
+                    <!-- 꼭 논리연산자를 써야하나? -->
+                    {{currentType || '기본순'}}
+                </button>
+
+
+                <ul class="sort-list" v-if="visibleSortMenu">
+                    <li v-for="(e, idx) in sortTypes" @click="sortItems(e)" :key="idx" :class="{ 'active': e === currentType }">{{e}}</li>
+                </ul>
+            </div>
+
             <!-- Card 레이아웃 -->
             <div class="item-info-inner">
                 <ul>
@@ -55,8 +68,16 @@ export default {
             ],
             // 상품 데이터
             products: productData,
+            // 상품 데이터 원본 복사
+            originalProducts: [...productData],
+
             // 모달 상태
             visibleModal: null,
+            // 정렬버튼 상태
+            visibleSortMenu: false,
+            // 아이템 정렬
+            currentType: "기본순",
+            sortTypes: ['기본순', '이름순', '가격순']
         }
     },
     // vue에서 함수 만들 때
@@ -66,7 +87,21 @@ export default {
         },
         closeModal() {
             this.visibleModal = null;
-        }
+        },
+        toggleList() {
+            this.visibleSortMenu = !this.visibleSortMenu;
+        },
+        sortItems(type) {
+            this.currentType = type; 
+            this.visibleSortMenu = false;
+            if (type == '기본순') {
+                this.products = [...this.originalProducts]
+            } else if(type == '이름순') {
+                this.products.sort((a, b) => {return a.title.localeCompare(b.title)})
+            } else if (type == '가격순') {
+                this.products.sort( (a, b) => {return Number(a.price.replace(/,/g, "")) - Number(b.price.replace(/,/g, ""))})
+            }
+        },
 
     },
     components: {

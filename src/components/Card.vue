@@ -6,7 +6,7 @@
         <a href="javascript:void(0);" @click="openModal(idx)">{{ e.title }}</a>
         <p>{{ e.price }}원</p>
         <div class="btn-wrap report">
-            <button @click="e.currentNum++">좋아요</button>
+            <button @click="e.currentNum++" class="btn-sm btn-28 btn-thumb">좋아요</button>
             <span>누적 수 : {{ e.currentNum }}</span>
         </div>
     </li>

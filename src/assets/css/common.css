@@ -7,11 +7,27 @@
 }
 a{text-decoration: none; color:#000;}
 ul,ol,li {list-style: none;}
-button {outline: none; background: none; border:none; cursor: pointer;}
+button {display:flex; justify-content: center; align-items: center; outline: none; background: none; border:none; cursor: pointer;}
 
 
 /********************** button **********************/
-.btn-24 {height: 24px;}
+[class*="btn-"] {border-radius: 4px;}
+.btn-sm { padding: 4px}
+.btn-md { padding: 12px;} 
+.btn-lg {}
+.btn-28 {height: 28px;}
+.btn-32 {height: 32px;}
+
+.btn-thumb {
+    border: 1px solid #b71919;
+    background-color: #b71919;
+    color:#fff;
+}
+.btn-primary {
+    border: 1px solid #007bff;
+    background-color: #007bff;
+    color:#fff;
+}
 /********************** input **********************/
 input {
     outline: none;
@@ -130,8 +146,35 @@ input:focus {
     font-weight: 500;
     flex-shrink: 0;
 }
-
 .modal-footer input {
     flex-grow: 1;
     width: 100%;
+}
+/* 정렬 드롭다운 메뉴 */
+.sort-button-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.sort-button-wrap > button {
+    font-weight: 500;
+}
+.sort-list {
+    position: absolute;
+    top: calc(100% + 8px);
+    width:130px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+}
+.sort-list > li {
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+    height: 45px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+} 
+.sort-list li.active {
+    font-weight: bold;
 }
