@@ -69,9 +69,6 @@ export default {
                 return (priceNum * qty).toLocaleString();
             }
         },
-
-
-
     },
 }
 </script>

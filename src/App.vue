@@ -4,18 +4,19 @@
         <Header :menus="menus" />
         <section>
             <!-- 배너 -->
-            <Banner />
+            <Banner v-if="showBanner == true" />
 
             <!-- 아이템 sort -->
             <div class="sort-button-wrap">
                 <button @click="toggleList" class="btn-md btn-32 btn-primary">
                     <!-- 꼭 논리연산자를 써야하나? -->
-                    {{currentType || '기본순'}}
+                    {{ currentType || '기본순' }}
                 </button>
 
 
                 <ul class="sort-list" v-if="visibleSortMenu">
-                    <li v-for="(e, idx) in sortTypes" @click="sortItems(e)" :key="idx" :class="{ 'active': e === currentType }">{{e}}</li>
+                    <li v-for="(e, idx) in sortTypes" @click="sortItems(e)" :key="idx"
+                        :class="{ 'active': e === currentType }">{{ e }}</li>
                 </ul>
             </div>
 
@@ -35,12 +36,13 @@
             <Modal @close-modal="visibleModal=null" :products="products" :visibleModal="visibleModal" :closeModal="closeModal" />
         </div> -->
 
-         <!--
+        <!--
             애니메이션 방법2. 
             vue 내장 컴포넌트 transition 사용하기
         -->
         <Transition name="fade">
-            <Modal @close-modal="visibleModal=null" :products="products" :visibleModal="visibleModal" :closeModal="closeModal" />
+            <Modal @close-modal="visibleModal = null" :products="products" :visibleModal="visibleModal"
+                :closeModal="closeModal" />
         </Transition>
     </div>
 </template>
@@ -66,6 +68,7 @@ export default {
                 { name: '스토어 찾기', link: 'javascript:void(0);' },
                 { name: '오시는길', link: 'javascript:void(0);' }
             ],
+            showBanner: true,
             // 상품 데이터
             products: productData,
             // 상품 데이터 원본 복사
@@ -77,7 +80,7 @@ export default {
             visibleSortMenu: false,
             // 아이템 정렬
             currentType: "기본순",
-            sortTypes: ['기본순', '이름순', '가격순']
+            sortTypes: ['기본순', '이름순', '가격순'],
         }
     },
     // vue에서 함수 만들 때
@@ -94,21 +97,34 @@ export default {
         },
         // 아이템 정렬
         sortItems(type) {
-            this.currentType = type; 
+            this.currentType = type;
             this.visibleSortMenu = false;
             if (type == '기본순') {
                 this.products = [...this.originalProducts]
-            } else if(type == '이름순') {
-                this.products.sort((a, b) => {return a.title.localeCompare(b.title)})
+            } else if (type == '이름순') {
+                this.products.sort((a, b) => { return a.title.localeCompare(b.title) })
             } else if (type == '가격순') {
-                this.products.sort( (a, b) => {return Number(a.price.replace(/,/g, "")) - Number(b.price.replace(/,/g, ""))})
+                this.products.sort((a, b) => { return Number(a.price.replace(/,/g, "")) - Number(b.price.replace(/,/g, "")) })
             }
         },
 
     },
     components: {
         Header, Banner, Card, Modal
-    }
+    },
+    // vue의 라이프사이클 훅 9가지
+    // beforeCreate (생성단계) 데이터와 이벤트 초기화 전
+    // created (생성단계) 데이터, computed, methods, watch만 있을떄
+    // beforeMount (마운트 단계) 컴포넌트가 DOM에 붙기 직전
+    // mounted (마운트 단계) 컴포넌트가 DOM에 완전히 붙은 후
+    // beforeUpdate (업데이트 단계) 데이터 변경 => DOM 업데이트 전
+    // updated (업데이트 단계) DOM 업데이트 완료 후
+    // beforeUnmount (제거 단계) 컴포넌트 제거 직전
+    // unmounted (제거 단계) 컴포넌트가 DOM에서 제거된 후
+    // errorCaptured (에러 처리) 하위 컴포넌트에서 에러 발생시
+
+
+
 }
 </script>
 
